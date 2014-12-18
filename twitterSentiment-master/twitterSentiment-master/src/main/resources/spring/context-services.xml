@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+	http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	">
+
+    <jdbc:embedded-database id="dataSource"/>
+
+    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
+        <property name="persistenceUnitName" value="persistenceUnit"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.sdg.ts.model" />
+    </bean>
+
+    <bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator"/>
+
+    <!-- Creates Repository Implementations for you -->
+    <jpa:repositories base-package="com.sdg.ts.repos" />
+
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="myTopic" class="com.sdg.ts.model.Topic">
+        <property name="name" value="Iron Man 3" />
+    </bean>
+
+    <bean class="com.sdg.ts.service.TopicListener">
+        <property name="topic" ref="myTopic" />
+    </bean>
+
+    <bean id="viralHeatSentimentAnalyzer" class="com.sdg.ts.service.ViralHeatSentimentAnalyzer" />
+    <bean id="alchemyApiSentimentAnalyzer" class="com.sdg.ts.service.AlchemyApiSentimentAnalyzer" />
+
+    <bean class="com.sdg.ts.service.AnalyzingTweetSink">
+        <property name="analyzer" ref="alchemyApiSentimentAnalyzer" />
+    </bean>
+
+</beans>

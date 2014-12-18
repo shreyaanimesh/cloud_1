@@ -1,0 +1,5 @@
+# Rename this file to alchemy.api and provide your api key
+# You may register for a key at http://www.alchemyapi.com/api/register.html
+alchemy.api.key=XXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+

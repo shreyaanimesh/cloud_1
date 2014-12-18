@@ -1,0 +1,3 @@
+# Rename this file to viralheat.api and provide your api key
+# You may register for a key at https://app.viralheat.com/developer/sentiment/get_started
+viralheat.api.key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXX

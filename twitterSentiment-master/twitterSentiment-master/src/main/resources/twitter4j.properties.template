@@ -1,0 +1,7 @@
+# Rename this file to twitter4j.properties and fill in the appropriate values
+# You may register your application https://dev.twitter.com/apps
+debug=true
+oauth.consumerKey=XXXXXXXXXXXXXXXX
+oauth.consumerSecret=XXXXXXXXXXX
+oauth.accessToken=XXXXXXXXXXXXXXXX
+oauth.accessTokenSecret=XXXXXXXXXXXXXX
